@@ -11,6 +11,10 @@ ul{
     list-style: none;
 }
 
+.red{
+    color:#A94442;
+}
+
 
 
 .bg_color{
@@ -42,7 +46,13 @@ ul{
     left:0;
     background-color: #222D32;
     z-index: 999;
+    transition: all 1s;
 }
+.lt_aside.hidemenu{
+
+    left:-180px;
+}
+
 .lt_aside .brand{
     height: 50px;
     line-height: 50px;
@@ -107,6 +117,11 @@ ul{
     height: 200px;
     padding-left:180px;
     padding-top: 50px;
+    transition: all 1s;
+}
+
+.lt_main.hidemenu{
+    padding-left: 0;
 }
 
 .lt_main .lt_topbar{
@@ -117,7 +132,11 @@ ul{
     top:0;
     background-color: #3C8DBC;
     padding-left:180px;
+    transition: all 1s;
 
+}
+.lt_topbar.hidemenu{
+    padding-left: 0;
 }
 
 .lt_main .lt_topbar a{
@@ -128,4 +147,10 @@ ul{
     text-align: center;
     font-size: 18px;
     color:#fff;
+}
+
+.lt_main .table-bordered th,
+.lt_main .table-bordered td{
+    text-align: center;
+    vertical-align: middle;
 }
