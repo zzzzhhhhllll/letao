@@ -40,4 +40,46 @@ $(function(){
         })
     }
 
+
+    // 模态框
+
+    $(".secondBtn").on("click" , function(){
+
+        $("#secondModal").modal("show");
+
+        $.ajax({
+            type:"get",
+            url:"/category/querySecondCategoryPaging",
+            data:{
+                page:1,
+                pageSize:100,
+            },
+            dataType:"json",
+            success:function(info){
+
+                var htmlStr = template("selectTpl" , info);
+
+                $(".dropdown-menu").html(htmlStr);
+            }
+        })
+    })
+
+    // 选择
+    $(".dropdown-menu").on("click" , "a" , function(){
+
+        var txt = $(this).text();
+
+        $("#dropdown-text").text(txt);
+    })
+
+    // 文件
+    $("#fileupload").fileupload({
+        dataType:'json',
+        done:function(e,data){
+            console.log(data);
+            var picUrl = data.result.picAddr;
+            $("#imgbox img").attr("src" , picUrl);
+        }
+    })
+
 })
