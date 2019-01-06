@@ -2,11 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/nprogress/nprogress.css">
+    <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
-    <div>111</div>
+
+    <!-- 左 -->
+    <div class="lt_aside">
+
+        <div class="brand">
+            <a href="#">黑马33期</a>
+        </div>
+        <div class="user">
+            <img src="./images/02.jpg" alt="">
+            <p>超级管理员</p>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="user.html"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
+                <li>
+                  <a href="javascript:;" class="category"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
+                  <!-- 二级导航 -->
+                  <div class="child">
+                    <a href="first.html">一级分类</a>
+                    <a href="second.html">二级分类</a>
+                  </div>
+                </li>
+                <li><a href="product.html"><i class="glyphicon glyphicon-tags"></i><span>商品管理</span></a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- 右 -->
+
+    <div class="lt_main">
+        <div class="lt_topbar">
+            <a href="#" class=" pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
+            <a href="#" class=" pull-right icon_menu"><i class="glyphicon glyphicon-log-out"></i></a>
+        </div>
+
+        <div class="container-fluid">
+                <ol class="breadcrumb mat_20">
+                    <li><a href="#">管理系统</a></li>
+                    <li class="active">首页</li>
+                </ol>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Launch demo modal
+                      </button>
+        </div>
+    </div>
+
+    <!-- 模态 -->
+    <!-- Button trigger modal -->
+      
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+    <script src="./lib/jquery/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+    <script src="./lib/nprogress/nprogress.js"></script>
+    <script src="./js/common.js"></script>
 </body>
 </html>

@@ -6,14 +6,12 @@ a:active{
 }
 
 ul{
-    padding: 0;
     margin: 0;
+    padding: 0;
     list-style: none;
 }
 
-.red{
-    color:#A94442;
-}
+
 
 .bg_color{
     background-color: #222D32;
@@ -22,46 +20,40 @@ ul{
 .panel-title{
     height: 40px;
     line-height: 40px;
-    text-align: center;
     font-size: 18px;
+    text-align: center;
 }
 
 .mat{
-    margin-top: 150px;
+    margin-top:150px;
 }
 
-.ma_20{
-    margin-top:20px;
+.mat_20{
+    margin-top: 30px;
 }
 
-/* 主页 */
+/* 左 */
 
 .lt_aside{
+    height: 100%;
+    width: 180px;
     position: fixed;
     top:0;
     left:0;
-    width: 180px;
-    height: 100%;
     background-color: #222D32;
     z-index: 999;
-    transition: all 1s;
 }
-
-.lt_aside.hidemenu{
-    left:-190px;
-}
-
 .lt_aside .brand{
     height: 50px;
     line-height: 50px;
     background-color: #367FA9;
+    text-align: center;
 }
 
 .lt_aside .brand a{
     display: block;
     color:#fff;
     font-size: 24px;
-    text-align: center;
 }
 
 .lt_aside .user{
@@ -75,24 +67,29 @@ ul{
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 .lt_aside .user p{
     height: 40px;
     line-height: 40px;
+    text-align: center;
     color:#fff;
     font-size: 18px;
-    text-align: center;
 }
 
 .lt_aside .nav li a{
-    display: block;
     height: 40px;
+    display: block;
     line-height: 40px;
-    border-left:3px solid transparent;
-    color:#fff;
     padding-left:40px;
+    color:#fff;
+    border-left:3px solid transparent;
+}
+
+.lt_aside .nav li a.current{
+    border-left:3px solid #006699;
+    background-color: #1D1F21;
 }
 
 .lt_aside .nav .child{
@@ -103,67 +100,32 @@ ul{
     padding-left:60px;
 }
 
-.lt_aside .nav a.current{
-    border-left:3px solid #006699;
-    background-color: #1D1F21;
-}
-
-
-/* 右侧主体部分 */
+/* 右 */
 
 .lt_main{
-    padding-top:50px;
+    width: 100%;
+    height: 200px;
     padding-left:180px;
-    height: 2000px;
-    transition: all 1s;
-}
-
-.lt_main.hidemenu{
-    padding-left:0;
-    
+    padding-top: 50px;
 }
 
 .lt_main .lt_topbar{
-    width: 100%;
     height: 50px;
+    width: 100%;
     position: fixed;
-    top:0;
     left:0;
-    padding-left:180px;
+    top:0;
     background-color: #3C8DBC;
-    transition: all 1s;
+    padding-left:180px;
+
 }
 
-.lt_topbar.hidemenu{
-    padding-left:0;
-    
-}
-
-.lt_topbar .menu_icon,
-.lt_topbar .logout_icon{
+.lt_main .lt_topbar a{
+    display: block;
     height: 50px;
     width: 50px;
-    color:#fff;
     line-height: 50px;
     text-align: center;
-    font-size: 20px;
-}
-
-.lt_main .breadcrumb{
-    margin-top:20px;
-}
-
-.echarts_l,
-.echarts_r{
-    width: 48%;
-    height: 400px;
-    background-color: skyblue;
-}
-
-
-/* 用户管理 */
-.lt_content .table.table-bordered th, 
-.lt_content .table.table-bordered td{
-    text-align: center;
-    vertical-align: middle;
+    font-size: 18px;
+    color:#fff;
 }
