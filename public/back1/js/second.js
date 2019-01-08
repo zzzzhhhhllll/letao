@@ -47,14 +47,14 @@ $(function(){
         $.ajax({
 
             type:"get",
-            url:"/category/querySecondCategoryPaging",
+            url:"/category/queryTopCategoryPaging",
             data:{
                 page:1,
                 pageSize:100
             },
             dataType:"json",
             success:function(info){
-
+                console.log(info)
                 var htmlStr = template("addTpl" , info);
                 $(".dropdown-menu").html(htmlStr);
             }
@@ -67,6 +67,17 @@ $(function(){
         var txt = $(this).text();
 
         $(".btn-text").text(txt);
+
+        var id = $(this).data("id");
+
+        console.log(txt);
+
+        $('[name="categoryId"]').val(id);
+        console.log(id);
+
+        console.log( $('[name="categoryId"]'));
+
+        $("#form").data('bootstrapValidator').updateStatus("categoryId", "VALID");
     })
 
 
@@ -81,7 +92,82 @@ $(function(){
           var newsrc = data.result.picAddr;
           
           $("#img_box img").attr("src" , newsrc);
+
+          $('[name="brandLogo"]').val(newsrc);
+
+          $("#form").data('bootstrapValidator').updateStatus("brandLogo", "VALID");
+          console.log($("#form").serialize());
         }
-  });
+    });
+
+    //表单校验
+    
+    $('#form').bootstrapValidator({
+        // 配置不校验的类型, 对 hidden 需要进行校验
+        excluded: [],
+    
+        // 配置图标
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',    // 校验成功
+          invalid: 'glyphicon glyphicon-remove',   // 校验失败
+          validating: 'glyphicon glyphicon-refresh'  // 校验中
+        },
+    
+        // 配置校验字段
+        fields: {
+          categoryId: {
+            validators: {
+              notEmpty: {
+                message: "请选择一级分类"
+              }
+            }
+          },
+          brandName: {
+            validators: {
+              notEmpty: {
+                message: "请输入二级分类名称"
+              }
+            }
+          },
+          brandLogo: {
+            validators: {
+              notEmpty: {
+                message: "请上传图片"
+              }
+            }
+          }
+        }
+      });
+    //发送后台
+
+    $("#form").on("success.form.bv" , function(e){
+
+        e.preventDefault();
+
+        $.ajax({
+
+            type:"post",
+            url:"/category/addSecondCategory",
+            data:$("#form").serialize(),
+            dataType:"json",
+            success:function(info){
+
+                console.log(info);
+
+                if(info.success){
+
+                    $("#secondModal").modal("hide");
+
+                    currentPage=1;
+                    render();
+
+                    $("#form").data("bootstrapValidator").resetForm(true);
+                    $(".btn-text").text("请选择一级分类");
+                    $("#img_box img").attr("src" , "../images/none.png");
+                }
+            }
+        })
+
+    })
 
 })

@@ -42,16 +42,15 @@ $(function(){
     }
 
 
-    // 点击显示模态框
+    // 添加商品显示模态框
+    $("#btn-add").on("click" , function(){
 
-    $(".addBtn").on("click" , function(){
-
-        $("#secondModal").modal("show");
+        $("#addModal").modal("show");
 
         $.ajax({
 
             type:"get",
-            url:"/category/querySecondCategoryPaging",
+            url:"/category/queryTopCategoryPaging",
             data:{
                 page:1,
                 pageSize:100
@@ -59,48 +58,55 @@ $(function(){
             dataType:"json",
             success:function(info){
                 console.log(info);
+
                 var htmlStr = template("selectTpl" , info);
+
                 $(".dropdown-menu").html(htmlStr);
+
             }
         })
     })
 
     // 给a注册点击事件
-    $(".dropdown-menu").on("click" , "a" , function(){
+
+    $(".dropdown-menu").on("click" , "a " , function(){
 
         var txt = $(this).text();
 
-        $("#dropdown-text").text(txt);
+        $(".btn-text").text(txt);
 
         var id = $(this).data("id");
 
         $('[name="categoryId"]').val(id);
 
         $("#form").data("bootstrapValidator").updateStatus("categoryId", "VALID")
+
     })
 
-    // 图片
+    // 上传图片
+
     $("#fileupload").fileupload({
+
         dataType:"json",
-
         done:function(e,data){
-
-            console.log(data);
 
             var picObj = data.result;
 
             picArr.unshift(picObj);
+            
+            picSrc = picObj.picAddr;
 
-            var picUrl = picObj.picAddr;
+            $("#img_box").prepend('<img src="'+picSrc+'" alt="" style="width: 100px">');
 
-            $("#imgbox").prepend('<img style="width:100px" src="'+picUrl+'" alt="" >');
+            if(picArr.length > 3){
 
-            if(picArr.length>3){
                 picArr.pop();
-                $("#imgbox img:last-of-type").remove();
+
+                $("#img_box img:last-of-type").remove();
             }
 
             if(picArr.length === 3){
+
                 $('#form').data("bootstrapValidator").updateStatus("picStatus", "VALID");
             }
         }
@@ -185,42 +191,42 @@ $(function(){
             }
             
         }
-        
     })
 
+    //向后台发送请求
 
+    $("#form").on("success.form.bv" , function(e){
 
-// 上传数据
+        e.preventDefault();
 
-$("#form").on('success.form.bv', function (e) {
-    e.preventDefault();
+        var record = $("#form").serialize();
 
-    var paramsStr = $("#form").serialize();
+        record+="&picArr="+JSON.stringify(picArr);
 
-    paramsStr+="&picArr="+JSON.stringify(picArr);
-    
         $.ajax({
             type:"post",
             url:"/product/addProduct",
-            data:paramsStr,
             dataType:"json",
+            data:record,
             success:function(info){
-                console.log(info);
 
+                console.log(info);
                 if(info.success){
 
-                    $("#secondModal").modal("hide");
+                    $("#addModal").modal("hide");
 
-                    currentPage=1;
+                    currentPage = 1;
+
                     render();
 
                     $("#form").data('bootstrapValidator').resetForm();
 
-                    $("#dropdown-text").text("请选择一级分类");
-                    $("#imgbox img").remove();
+                    $("#img_box img").remove();
+
+                    $(".btn-text").text("请选择一级分类");
                 }
             }
         })
-    });
+    })
 
 })

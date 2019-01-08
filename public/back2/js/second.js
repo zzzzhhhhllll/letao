@@ -67,6 +67,12 @@ $(function(){
         var nowText = $(this).text();
 
         $(".dropdown-text").text(nowText);
+
+        var id = $(this).data("id");
+
+        $('[name="categoryId"]').val(id);
+
+        $("#form").data("bootstrapValiator").updateStatus("categoryId" , "VALID");
     })
 
     // 文件上传
@@ -80,6 +86,78 @@ $(function(){
           var newsrc = data.result.picAddr;
 
           $("#imgbox img").attr("src" , newsrc);
+
+          $('[name="brandLogo"]').val(newsrc);
+
+          $("#form").data("bootstrapValiator").updateStatus("brandLogo" , "VALID");
         }
-  });
+    });
+
+    //表单校验
+    
+    $('#form').bootstrapValidator({
+        // 配置不校验的类型, 对 hidden 需要进行校验
+        excluded: [],
+    
+        // 配置图标
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',    // 校验成功
+          invalid: 'glyphicon glyphicon-remove',   // 校验失败
+          validating: 'glyphicon glyphicon-refresh'  // 校验中
+        },
+    
+        // 配置校验字段
+        fields: {
+          categoryId: {
+            validators: {
+              notEmpty: {
+                message: "请选择一级分类"
+              }
+            }
+          },
+          brandName: {
+            validators: {
+              notEmpty: {
+                message: "请输入二级分类名称"
+              }
+            }
+          },
+          brandLogo: {
+            validators: {
+              notEmpty: {
+                message: "请上传图片"
+              }
+            }
+          }
+        }
+    });
+
+
+    // 发送ajax请求
+
+    $("#form").on("success.form.bv" , function(){
+
+        $.ajax({
+
+            type:"post",
+            url:"/category/addSecondCategory",
+            data:$("#form").serialize(),
+            dataType:"json",
+            success:function(info){
+                if(info.success){
+
+                    $("#addModal").modal("hide");
+
+                    currentPage=1;
+                    render();
+
+                    $("#imgbox img").attr("src" , "../images/none.png");
+                    $(".dropdown-text").text("请输入一级分类");
+
+                }
+
+            }
+            
+        })
+    })
 })
